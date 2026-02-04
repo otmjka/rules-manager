@@ -1,3 +1,7 @@
+```bash
+npm i
+```
+
 1. Download rulesets JSON from uBlock Origin
 
 ```bash
