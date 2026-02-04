@@ -1,2 +1,5 @@
 node_modules
+filters
+rulesets.json
 *.log.md
+proba.txt

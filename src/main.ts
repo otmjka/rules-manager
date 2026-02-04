@@ -1,4 +1,4 @@
-import { a as filters } from "./rules";
+import filters from "../rulesets.json" with { type: "json" };
 import { writeFile, mkdir } from "node:fs/promises";
 import { join } from "node:path";
 import type { Filter, DownloadProgress } from "./types";
