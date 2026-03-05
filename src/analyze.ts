@@ -6,6 +6,7 @@ import { processRule } from "./helpers/processRule";
 import { RuleType } from "./helpers/ruleType";
 const result = [];
 const targetDomains = [
+  "youtube.com",
   "m.youtube.com",
   "www.youtube.com",
   "youtube-nocookie.com",
