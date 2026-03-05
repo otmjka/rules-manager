@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "analyze": "npx tsx src/analyze.ts",
     "download": "npx tsx src/main.ts",
     "parse": "npx tsx src/parseScriptletRule.ts",
     "download-rulesets": "curl -L \"https://raw.githubusercontent.com/gorhill/uBlock/efc59a2fc8a4891bd9b359d624a8fac778f14a42/platform/mv3/rulesets.json\" -o rulesets.json"
   },
   "devDependencies": {
+    "prettier": "^3.8.1",
     "tsx": "^4.7.0",
     "typescript": "^5.3.0"
   }

@@ -1,12 +1,17 @@
 import filters from "../rulesets.json" with { type: "json" };
 import { writeFile, mkdir } from "node:fs/promises";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
 import type { Filter, DownloadProgress } from "./types";
 import { downloadFile } from "./downloadFile";
 import { getFilenameFromUrl } from "./getFilenameFromUrl";
 import { showProgress } from "./showProgress";
 
-const OUTPUT_DIR = "./filters";
+const dirArg = process.argv[2];
+if (!dirArg) {
+  console.error("Usage: npx tsx src/main.ts <output-dir>");
+  process.exit(1);
+}
+const OUTPUT_DIR = resolve(dirArg);
 
 async function downloadAndSave(url: string, filepath: string): Promise<void> {
   return new Promise((resolve, reject) => {
@@ -32,14 +37,18 @@ async function main(): Promise<void> {
   await mkdir(OUTPUT_DIR, { recursive: true });
 
   for (const filter of filters as Filter[]) {
-    const filterDir = join(OUTPUT_DIR, filter.id);
-    await mkdir(filterDir, { recursive: true });
+    if (!filter.enabled || (Array.isArray(filter.excludedPlatforms) && filter.excludedPlatforms?.indexOf('safari') > -1)) {
+      console.log(`🩸🩸🩸 skip ${filter.id} 🩸🩸🩸`)
+      continue
+    }
+    // const filterDir = join(OUTPUT_DIR, filter.id);
+    // await mkdir(filterDir, { recursive: true });
 
     console.log(`\nProcessing: ${filter.name} (${filter.id})`);
 
     for (const url of filter.urls) {
       const filename = getFilenameFromUrl(url);
-      const filepath = join(filterDir, filename);
+      const filepath = join(OUTPUT_DIR, filename);
 
       try {
         console.log(`  Downloading: ${url}`);

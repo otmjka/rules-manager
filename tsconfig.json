@@ -8,5 +8,11 @@
     "skipLibCheck": true,
     "outDir": "./dist"
   },
-  "include": ["*.ts"]
+  "include": ["*.ts"],
+  "exclude": [                                                                                                                                                                    
+         "node_modules",                                                                               
+         "archive.log",                                                                                
+         "**/*.log.ts",                                                                                
+         "**/*.log.md"                                                                                 
+      ]
 }
